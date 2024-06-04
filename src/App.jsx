@@ -15,6 +15,8 @@ function App() {
 
       {isPopup && <Popup {...{ setVideoList, setCurrentVideoSrc, setIsPopup }} />}
       <VideoPlayer />
+      <ContextProvider></ContextProvider>
+
     </div>
   )
 }
