@@ -1,5 +1,23 @@
 @import "../scss/input";
 
+.VideoPlayerWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+
+  .control-button {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    font-size: 1.5rem;
+    margin: 0 1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+  }
+}
+
 .VideoPlayer {
   width: min(90vw, 800px);
   display: flex;
@@ -7,9 +25,16 @@
   align-items: center;
   position: relative;
 
-  video {
-    width: 100%;
-    border-radius: 0.8rem 0.8rem 0rem 0rem;
+  .VideoPlayer__video-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    video {
+      width: 100%;
+      border-radius: 0.8rem 0.8rem 0rem 0rem;
+    }
   }
 
   &__controls {
