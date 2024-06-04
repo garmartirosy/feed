@@ -164,7 +164,7 @@ function VideoPlayer() {
             <button className="control-button next" onClick={handleNext}>
                 <i className="ri-skip-forward-fill icon"></i>
             </button>
-            <button>ffffffffffffffffffffffffffffffffffffffffffffffff</button>
+            
         </div>
     );
 }
