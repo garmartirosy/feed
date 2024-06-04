@@ -116,7 +116,6 @@ function VideoPlayer() {
         return () => clearInterval(interval);
     }, [isPlaying]);
 
-
     useEffect(() => {
         currentVideoIndex.current = videoList?.findIndex(item => item === currentVideoSrc) || 0;
         videoRef.current.addEventListener('loadeddata', () => {
@@ -126,44 +125,47 @@ function VideoPlayer() {
             setIsPlaying(false);
             play();
         }, false);
-        videoRef.current.addEventListener('ended', handleNext)
+        videoRef.current.addEventListener('ended', handleNext);
     }, [currentVideoSrc, handleNext, videoList]);
 
     return (
-        <div className="VideoPlayer">
-            <video ref={videoRef} src={currentVideoSrc} onClick={handlePlayPause}>
-            </video>
-            <div className="VideoPlayer__controls">
-                <div className="control-group control-group-btn">
-                    <button className="control-button pre" onClick={handlePrev}>
-                        <i className="ri-skip-back-fill icon"></i>
-                    </button>
-                    <button className="control-button play-pause" onClick={handlePlayPause}>
-                        <i className={`ri-${isPlaying ? 'pause' : 'play'}-fill icon`}></i>
-                    </button>
-                    <button className="control-button next" onClick={handleNext}>
-                        <i className="ri-skip-forward-fill icon"></i>
-                    </button>
-                    <button className="control-button stop" onClick={stop}>
-                        <i className="ri-stop-fill icon"></i>
-                    </button>
+        <div className="VideoPlayerWrapper">
+            <button className="control-button prev" onClick={handlePrev}>
+                <i className="ri-skip-back-fill icon"></i>
+            </button>
+            <div className="VideoPlayer">
+                <div className="VideoPlayer__video-container">
+                    <video ref={videoRef} src={currentVideoSrc} onClick={handlePlayPause}></video>
                 </div>
-                <div className="control-group control-group-slider">
-                    <input type="range" className="range-input" ref={videoRangeRef} onChange={handleVideoRange} max={durationSec} value={currentSec} min={0} />
-                    <span className="time">{currentTime[0]}:{currentTime[1]} / {duration[0]}:{duration[1]}</span>
-                </div>
-                <div className="control-group control-group-volume">
-                    <button className="control-button volume" onClick={handleMute}>
-                        <i className={`ri-volume-${isMute ? 'mute' : 'up'}-fill`}></i>
-                    </button>
-                    <input type="range" className='range-input' ref={volumeRangeRef} max={1} min={0} value={currentVolume} onChange={handleVolumeRange} step={0.1} />
-                    <button className="control-button full-screen" onClick={handleFullScreen}>
-                        <i className="ri-fullscreen-line"></i>
-                    </button>
+                <div className="VideoPlayer__controls">
+                    <div className="control-group control-group-btn">
+                        <button className="control-button play-pause" onClick={handlePlayPause}>
+                            <i className={`ri-${isPlaying ? 'pause' : 'play'}-fill icon`}></i>
+                        </button>
+                        <button className="control-button stop" onClick={stop}>
+                            <i className="ri-stop-fill icon"></i>
+                        </button>
+                    </div>
+                    <div className="control-group control-group-slider">
+                        <input type="range" className="range-input" ref={videoRangeRef} onChange={handleVideoRange} max={durationSec} value={currentSec} min={0} />
+                        <span className="time">{currentTime[0]}:{currentTime[1]} / {duration[0]}:{duration[1]}</span>
+                    </div>
+                    <div className="control-group control-group-volume">
+                        <button className="control-button volume" onClick={handleMute}>
+                            <i className={`ri-volume-${isMute ? 'mute' : 'up'}-fill`}></i>
+                        </button>
+                        <input type="range" className='range-input' ref={volumeRangeRef} max={1} min={0} value={currentVolume} onChange={handleVolumeRange} step={0.1} />
+                        <button className="control-button full-screen" onClick={handleFullScreen}>
+                            <i className="ri-fullscreen-line"></i>
+                        </button>
+                    </div>
                 </div>
             </div>
+            <button className="control-button next" onClick={handleNext}>
+                <i className="ri-skip-forward-fill icon"></i>
+            </button>
         </div>
-    )
+    );
 }
 
-export default VideoPlayer
+export default VideoPlayer;
