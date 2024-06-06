@@ -1,10 +1,9 @@
 import { formatTime } from '../utils/formatTime';
 import './VideoPlayer.scss';
 import { useCallback, useContext, useEffect, useRef, useState } from 'react';
-import { Context } from '../Context/Context';
+import { Context } from '../Context/Context'; // Ensure this imports the new context
 
 function VideoPlayer() {
-
     const { videoList, currentVideoSrc, setCurrentVideoSrc } = useContext(Context);
 
     const [isPlaying, setIsPlaying] = useState(false);
@@ -84,7 +83,7 @@ function VideoPlayer() {
         let volume = volumeRangeRef.current.value;
         videoRef.current.volume = volume;
         setCurrentVolume(volume);
-        if (volume == 0) {
+        if (volume === 0) {
             setIsMute(true);
         } else {
             setIsMute(false);
@@ -164,7 +163,6 @@ function VideoPlayer() {
             <button className="control-button next" onClick={handleNext}>
                 <i className="ri-skip-forward-fill icon"></i>
             </button>
-            
         </div>
     );
 }
